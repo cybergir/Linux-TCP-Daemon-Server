@@ -1,0 +1,132 @@
+# Daemon Installation Documentation
+
+## Introduction
+This guide provides instructions for setting up a TCP server daemon in a Linux environment using WSL. It covers creating a systemd service, configuring environment variables, and troubleshooting common issues.
+
+## Prerequisites
+- **WSL Installation**: Ensure WSL is installed and configured on your system.
+- **Linux Distribution**: Install a Linux distribution (e.g., Ubuntu) from the Microsoft Store.
+
+## Step-by-Step Setup
+
+### Step 1: Install Python and Virtual Environment
+1. **Install Python**:
+   ```bash
+   sudo apt update && sudo apt install python3 python3-pip python3-venv
+   ```
+2. **Create a Virtual Environment**:
+   ```bash
+   python3 -m venv myenv
+   ```
+3. **Activate the Virtual Environment**:
+   ```bash
+   source myenv/Scripts/activate
+   ```
+
+### Step 2: Install Dependencies
+- **Install Required Packages**:
+  ```bash
+    pip install -r requirements.txt
+  ```
+
+### Step 3: Configure Environment Variables
+- **Export Environment Variables**:
+  ```bash
+  export LINUX_PATH="/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task"
+  export CERT_PATH="/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/cert.pem"
+  export TEST_SSL_CERT_PATH="/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/cert.pem"
+  export KEY_PATH="/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/key.pem"
+  export CONFIG_PATH="/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/config.ini"
+  export TCP_SERVER_PATH="/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task"
+  ```
+
+### Step 4: Update Script to Use Environment Variables
+Ensure your script reads environment variables correctly:
+```python
+import os
+
+linux_path = os.environ.get("LINUX_PATH")
+cert_path = os.environ.get("CERT_PATH")
+key_path = os.environ.get("KEY_PATH")
+config_path = os.environ.get("CONFIG_PATH")
+
+if not linux_path or not cert_path or not key_path or not config_path:
+    raise ValueError("One or more required environment variables are missing.")
+```
+
+### Step 5: Service File Configuration
+Create a service file at `/etc/systemd/system/tcpserver.service` with the following content:
+```ini
+  GNU nano 7.2               /etc/systemd/system/tcpserver.service                        [Unit]
+Description=TCP Server Service
+After=network.target
+
+[Service]
+WorkingDirectory=/home/ruby/project
+ExecStart=/home/ruby/project/myenv/bin/python /home/ruby/project/server.py start
+Restart=on-failure
+RestartSec=5
+Type=simple
+Environment="CONFIG_PATH=/home/ruby/config.ini"
+Environment="CERT_PATH=/home/ruby/project/cert.pem"
+Environment="KEY_PATH=/home/ruby/project/key.pem"
+PIDFile=/home/ruby/project/server.pid
+
+LimitNOFILE=65535
+LimitNPROC=65535
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### Step 6: Enable and Start the Service
+1. Reload systemd to recognize the new service file:
+   ```bash
+   sudo systemctl daemon-reload
+   ```
+2. Enable the service to start on boot:
+   ```bash
+   sudo systemctl enable tcpserver.service
+   ```
+3. Start the service:
+   ```bash
+   sudo systemctl start tcpserver.service
+   ```
+4. Check the status of the service:
+   ```bash
+   sudo systemctl status tcpserver.service
+   ```
+
+### Step 7: Troubleshooting
+- **Check Logs**:
+  ```bash
+  journalctl -u tcpserver.service -b --no-pager
+  ```
+- **Verify File Paths and Permissions**:
+  ```bash
+  ls -l $LINUX_PATH $CERT_PATH $KEY_PATH $CONFIG_PATH
+  ```
+- **Run the Script Manually**:
+  ```bash
+  ~/project/myenv/bin/python server.py start
+  ```
+
+---
+
+## Daemon Class Implementation
+The `Daemon` class handles process forking and sets up the environment for running in the background. Ensure that it correctly initializes logging and manages the server's lifecycle.
+
+## Logging Configuration
+Logs are redirected to a custom path (e.g., `/home/ruby/project/logs/my_server.log`). You can change this path based on your needs. To view logs, use:
+```bash
+tail -f /home/ruby/project/logs/my_server.log
+```
+
+## Main Function
+The `main()` function is called within the `Daemon` class's run() method, starting the server application.
+
+## Test Your Daemon
+To check if your daemon is running correctly, use:
+```bash
+sudo systemctl status tcpserver.service
+```

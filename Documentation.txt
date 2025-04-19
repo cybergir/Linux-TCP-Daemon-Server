@@ -1,0 +1,123 @@
+# Project Documentation
+
+## Introduction
+
+This document provides comprehensive instructions for setting up and running the server application. It covers SSL configuration, environment variable setup, and troubleshooting tips. This guide is intended for developers and system administrators who need to deploy and maintain the server. The server application is responsible for [briefly describe the purpose of the server, e.g., processing search queries against a large dataset].
+
+## Installation Instructions
+
+1.  Navigate to the project directory:
+
+    *   Use the following command to change your current directory to the project directory:
+        \`cd /Desktop/Standard Introductory Test Task\`
+
+2.  Set up your virtual environment (using Bash):
+
+    *   A virtual environment is highly recommended to isolate project dependencies and avoid conflicts with other Python projects. If you choose not to use a virtual environment, ensure that all dependencies are managed correctly.
+    *   To use a virtual environment, you need Python 3.6 or higher.
+    *   Check your Python version using \`python --version\`. If it does not meet the minimum requirements, update your Python version.
+
+    *   For all platforms (Linux, macOS, Windows with Bash-compatible Shells):
+
+        *   Create the Virtual Environment:
+            \`python -m venv venv\`
+        *   Activate the virtual environment:
+            \`source myenv/Scripts/activate\`
+
+3.  Install required packages:
+
+    *   Install all necessary Python packages from the \`requirements.txt\` file using pip:
+        \`pip install -r requirements.txt\`
+
+## SSL Certificate Generation
+
+To enable SSL authentication, you need to generate a certificate and key file. You can use OpenSSL for this purpose. Follow these steps:
+
+1.  Install OpenSSL:
+
+    *   If you don't have OpenSSL installed, download and install it from [https://www.openssl.org/](https://www.openssl.org/) or use your system's package manager (e.g., `apt-get install openssl` on Debian/Ubuntu).
+
+2.  Generate a Private Key and Self-Signed Certificate:
+
+    *   Run the following command to generate a private key (`key.pem`) and a self-signed certificate (`cert.pem`) valid for 365 days:
+
+        \`openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out cert.pem\`
+
+    *   This command will:
+
+        *   Generate a new 2048-bit RSA key (\`-newkey rsa:2048\`).
+        *   Not encrypt the key (\`-nodes\`).
+        *   Save the key to `key.pem` (\`-keyout key.pem\`).
+        *   Create a self-signed certificate (\`-x509\`).
+        *   Make the certificate valid for 365 days (\`-days 365\`).
+        *   Save the certificate to `cert.pem` (\`-out cert.pem\`).
+
+    *   You will be prompted to enter information about the certificate, such as country, organization name, etc. You can leave these blank if desired.
+
+## Generating SSL Files
+
+SSL files are essential for enabling secure communication between the client and the server using the HTTPS protocol. If the SSL files are not set up, then communication may be insecure and unencrypted, which is not recommended.
+
+## Running the Application
+
+### Set up the Environment Variables
+
+Before running the server or client, set the following environment variables. These variables configure the application's behavior and specify the locations of required files.
+
+*   Data File Path**: Specifies the path to the data file that the server will search. If the data file path is incorrect, an error will be thrown.
+    \`export LINUX_PATH="C:/Users/ADMIN/Desktop/Standard Introductory Test Task/200k.txt"\`
+
+*   SSL Certificate Path**: Specifies the paths to the SSL certificate and key files for secure communication. If the SSL keys are incorrect, it may refuse connection or result in other SSL exceptions.
+    \`export CERT_PATH="C:/Users/ADMIN/Desktop/Standard Introductory Test Task/cert.pem"\`
+    \`export TEST_SSL_CERT_PATH="C:/Users/ADMIN/Desktop/Standard Introductory Test Task/cert.pem"\`
+    \`export KEY_PATH="C:/Users/ADMIN/Desktop/Standard Introductory Test Task/key.pem"\`
+
+
+
+*   **Configuration File Path**: Specifies the path to the configuration file containing server settings, such as the port number and SSL settings. If this path is incorrect, an exception may occur when starting the server.
+    \`export CONFIG_PATH="C:/Users/ADMIN/Desktop/Standard Introductory Test Task/config.ini"\`
+
+    \`export TCP_SERVER_PATH="/mnt/c/Users/ADMIN/Desktop/Standard\ Introductory\ Test\ Task"`\
+
+*   For Linux Users
+    Navigate to the project directory:
+    cd "/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task"
+
+*   Before running the server or client, set the following environment variables. These variables configure the application's behavior and specify the locations of required files.
+    \`export LINUX_PATH="/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/200k.txt"\`
+    \`export CERT_PATH="/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/cert.pem"\`
+    \`export TEST_SSL_CERT_PATH="/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/cert.pem"\`
+    \`export KEY_PATH="/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/key.pem"\`
+    \`export CONFIG_PATH="/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/config.ini"\`
+    \`export TCP_SERVER_PATH="/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task"\`
+    \`export PID_FILE="/home/ruby/project/server_debug.pid"\`
+    \`export LOG_FILE="/tmp/my_server.log"\`
+
+### Start the Server
+
+*   Run the server application using the following command:
+    \`python server.py\`
+
+*   For Linux users
+### To start the server
+    \`~/project/myenv/bin/python server.py start\`
+
+### To stop the server
+    \`~/project/myenv/bin/python server.py stop\`
+
+
+### To Run the Client with SSL
+
+*   Run the client application with SSL enabled using this command. Replace "your query string" with your desired search term.
+    \`python client.py --server_address localhost --server_port 44445 --use_ssl --query "your query string"\`
+
+*   Linux Users
+    python /home/ruby/project/client.py --server_address 127.0.0.1 --server_port 44445 --use_ssl --query "example search"
+
+
+### Persistently Set Up Environment Variables
+
+For all platforms (Linux, macOS, Windows with Bash-compatible Shells):
+
+*   Append each of these lines into \~/.bashrc and apply changes by running:
+    \`source ~/.bashrc\`

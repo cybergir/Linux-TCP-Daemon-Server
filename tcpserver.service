@@ -1,0 +1,14 @@
+[Unit]
+Description=TCP Server Service
+After=network.target
+
+[Service]
+User=ruby
+Group=ruby
+WorkingDirectory=/home/ruby/project
+ExecStart=/home/ruby/project/venv/bin/python server.py start
+Restart=on-failure
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
