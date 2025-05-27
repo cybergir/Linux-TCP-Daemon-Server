@@ -1,4 +1,3 @@
-
 __pycache__/
 *.py[cod]
 *.so
@@ -8,3 +7,90 @@ env/
 *.egg-info/
 .mypy_cache/
 .pytest_cache/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+pyenv.cfg
+
+# Build and release artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# Environment files
+.env
+.venv/
+venv/
+env/
+ENV/
+
+.github/
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Log files
+*.log
+logs/
+
+# Data files
+data/raw/
+data/processed/
+*.csv
+*.xlsx
+*.json
+
+# Secrets and config overrides
+config/local*.yaml
+secrets.*
+*.key
+*.pem
+*.cert
+
+# Docker/Container files
+!Dockerfile
+docker-compose.override.yml
+
+# Kubernetes files
+kubeconfig
+*.kube/
+
+# Terraform files
+.terraform/
+*.tfstate
+*.tfstate.backup
+terraform.tfvars
+
+# Testing artifacts
+.coverage
+htmlcov/
+.pytest_cache/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+.coverage
+
+ca-cert.pem
+ca-key.pem
+cert.pem
+key.pem
+
+wsl
+
+server.key
+server.crt
+
+Scripts
+
+.idea
