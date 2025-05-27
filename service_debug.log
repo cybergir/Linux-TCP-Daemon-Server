@@ -1054,3 +1054,74 @@ AttributeError: 'ServerConfig' object has no attribute 'file_path'
 2025-03-21 18:22:28,115 - INFO - Memory Usage: 16.3%
 2025-03-21 18:22:28,116 - INFO - CPU Usage: 0.5%
 2025-03-21 18:22:28,116 - INFO - Total Requests: 6, Successful Requests: 6, Failed Requests: 0
+2025-05-09 14:23:38,583 - ERROR - Unhandled exception: Configured file path does not exist: ${LINUX_PATH}
+Traceback (most recent call last):
+  File "/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/server.py", line 584, in <module>
+    main()
+  File "/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/server.py", line 536, in main
+    config = ServerConfig(config_path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/server.py", line 65, in __init__
+    self.validate_file_path(self.file_path)
+  File "/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/server.py", line 98, in validate_file_path
+    raise FileNotFoundError(
+FileNotFoundError: Configured file path does not exist: ${LINUX_PATH}
+2025-05-09 14:26:23,290 - INFO - Creating SSL context...
+2025-05-09 14:26:23,293 - INFO - Server started on ('0.0.0.0', 44445)
+2025-05-09 14:26:23,293 - INFO - Server is running...
+2025-05-09 14:26:37,218 - INFO - Shutting down server...
+2025-05-09 14:26:37,219 - INFO - Server connections closed.
+2025-05-09 14:26:37,219 - INFO - Shutting down executor...
+2025-05-09 14:26:37,223 - INFO - Executor shut down successfully.
+2025-05-09 14:26:37,223 - INFO - Server shut down successfully.
+2025-05-09 14:26:37,223 - INFO - Final Total Requests: 0
+2025-05-09 14:26:37,223 - INFO - Final Successful Requests: 0
+2025-05-09 14:26:37,224 - INFO - Final Failed Requests: 0
+2025-05-09 14:28:15,369 - ERROR - Unhandled exception: Configured file path is a directory, not a file: /mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task
+Traceback (most recent call last):
+  File "/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/server.py", line 584, in <module>
+    main()
+  File "/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/server.py", line 536, in main
+    config = ServerConfig(config_path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/server.py", line 65, in __init__
+    self.validate_file_path(self.file_path)
+  File "/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/server.py", line 102, in validate_file_path
+    raise ValueError(
+ValueError: Configured file path is a directory, not a file: /mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task
+2025-05-09 14:42:11,979 - ERROR - Unhandled exception: Configured file path does not exist: ${LINUX_PATH}
+Traceback (most recent call last):
+  File "/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/server.py", line 584, in <module>
+    main()
+  File "/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/server.py", line 536, in main
+    config = ServerConfig(config_path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/server.py", line 65, in __init__
+    self.validate_file_path(self.file_path)
+  File "/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/server.py", line 98, in validate_file_path
+    raise FileNotFoundError(
+FileNotFoundError: Configured file path does not exist: ${LINUX_PATH}
+2025-05-09 14:42:53,999 - CRITICAL - Unexpected error occurred while starting the server: CERT_PATH environment variable must be set.
+2025-05-09 14:43:27,464 - CRITICAL - Unexpected error occurred while starting the server: CERT_PATH environment variable must be set.
+2025-05-09 14:43:50,365 - CRITICAL - Unexpected error occurred while starting the server: CERT_PATH environment variable must be set.
+2025-05-09 14:44:22,851 - CRITICAL - Unexpected error occurred while starting the server: CERT_PATH environment variable must be set.
+2025-05-09 14:46:39,354 - CRITICAL - Unexpected error occurred while starting the server: KEY_PATH environment variable must be set.
+2025-05-09 14:47:52,858 - INFO - Creating SSL context...
+2025-05-09 14:47:52,859 - INFO - Server started on ('0.0.0.0', 44445)
+2025-05-09 14:47:52,859 - INFO - Server is running...
+2025-05-09 14:48:07,736 - INFO - Client connected: ('127.0.0.1', 44548)
+2025-05-09 14:48:07,738 - INFO - Request from client ('127.0.0.1', 44548): your query string
+2025-05-09 14:48:07,903 - INFO - Response Time: 0.1636 seconds
+2025-05-09 14:48:07,903 - INFO - Response sent to client: ('127.0.0.1', 44548)
+2025-05-09 14:48:07,904 - INFO - Connection closed for client: ('127.0.0.1', 44548)
+2025-05-09 14:48:08,916 - INFO - Memory Usage: 40.8%
+2025-05-09 14:48:08,917 - INFO - CPU Usage: 5.5%
+2025-05-09 14:48:08,918 - INFO - Total Requests: 1, Successful Requests: 1, Failed Requests: 0
+2025-05-09 14:48:54,881 - INFO - Client connected: ('127.0.0.1', 46776)
+2025-05-09 14:48:54,881 - INFO - Request from client ('127.0.0.1', 46776): hello world
+2025-05-09 14:48:54,885 - INFO - Response Time: 0.0027 seconds
+2025-05-09 14:48:54,886 - INFO - Response sent to client: ('127.0.0.1', 46776)
+2025-05-09 14:48:54,887 - INFO - Connection closed for client: ('127.0.0.1', 46776)
+2025-05-09 14:48:55,893 - INFO - Memory Usage: 40.9%
+2025-05-09 14:48:55,894 - INFO - CPU Usage: 1.8%
+2025-05-09 14:48:55,894 - INFO - Total Requests: 2, Successful Requests: 2, Failed Requests: 0

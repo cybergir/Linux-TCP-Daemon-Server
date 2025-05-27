@@ -11,3 +11,4 @@ def is_server_ready(host: str, port: int, timeout: int = 5) -> bool:
         except (ConnectionRefusedError, socket.timeout):
             time.sleep(1)  # Wait for 1 second before retrying
     return False
+

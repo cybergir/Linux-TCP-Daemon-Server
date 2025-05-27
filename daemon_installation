@@ -38,6 +38,7 @@ This guide provides instructions for setting up a TCP server daemon in a Linux e
   export KEY_PATH="/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/key.pem"
   export CONFIG_PATH="/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task/config.ini"
   export TCP_SERVER_PATH="/mnt/c/Users/ADMIN/Desktop/Standard Introductory Test Task"
+  export LOG_FILE="/tmp/my_server.log"
   ```
 
 ### Step 4: Update Script to Use Environment Variables
